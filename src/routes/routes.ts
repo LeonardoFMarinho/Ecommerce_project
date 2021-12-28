@@ -5,6 +5,7 @@ import { CreateCustomerController } from "../useCases/createCustomer/CreateCusto
 import { CreateOrderController } from "../useCases/createOrders/createOrderController";
 import { CreateProductController } from "../useCases/createProducts/createProductsController";
 import { ListCustomerController } from "../useCases/listCustomers/listCustomerController";
+import { ListOrderController } from "../useCases/listOrders/listOrderController";
 import { ListProductsController } from "../useCases/listProducts/listProductsController";
 
 const router = Router();
@@ -14,6 +15,7 @@ const createProductController = new CreateProductController();
 const createOrderController = new CreateOrderController();
 const listCustomerController = new ListCustomerController();
 const listProductsController = new ListProductsController();
+const listOrderController = new ListOrderController();
 
 router.post(
   "/customer",
@@ -39,4 +41,6 @@ router.post("/orders", createOrderController.handle);
 router.get("/customer", listCustomerController.handle);
 
 router.get("/products", listProductsController.handle);
+
+router.get("/orders", listOrderController.handle);
 export { router };

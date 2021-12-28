@@ -20,9 +20,17 @@ class OrderRepository implements IOrderRepository {
     return order;
   }
 
-  listOrders({ customerId }): Promise<Order[]> {
-    const allOrders = this.repository.find({ customerId });
-    return allOrders;
+  // listOrders({ customerId }): Promise<Order[]> {
+  //   const allOrders = this.repository.find({ customerId });
+  //   return allOrders;
+  // }
+  async listByOrderTotalPrice(): Promise<Order[]> {
+    const orderByTotalPrice = await this.repository.find({
+      order: {
+        totalprice: "DESC",
+      },
+    });
+    return orderByTotalPrice;
   }
 }
 
