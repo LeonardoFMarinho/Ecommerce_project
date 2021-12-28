@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  database_ecommerce:
+    image: postgres
+    container_name: database_ecommerce
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=ecommerce123
+      - POSTGRES_DB=ecommerce
+    volumes:
+      - pgdata:/data/postgres
+
+  app:
+    build: .
+    container_name: ecommerce
+    restart: always
+    ports: 
+      - 4321:4321
+    volumes:
+      - .:/usr/app
+    links:
+      - database_ecommerce
+    depends_on: 
+      - database_ecommerce
+
+volumes:
+  pgdata: 
+    driver: local 
