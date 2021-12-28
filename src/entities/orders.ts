@@ -9,11 +9,11 @@ class Order {
   @Column()
   customerId: string;
 
-  @Column()
-  totalprice: string;
+  @Column("int")
+  totalprice: number;
 
   @Column()
-  products: string;
+  products: number;
 
   // @Column()
   // quantity: string;

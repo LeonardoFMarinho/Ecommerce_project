@@ -1,7 +1,7 @@
 interface ICreateOrderDTO {
   customerId: string;
-  products: string;
-  totalprice: string;
+  products: number;
+  totalprice: number;
 }
 
 export { ICreateOrderDTO };

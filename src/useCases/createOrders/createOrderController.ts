@@ -5,13 +5,14 @@ import { CreateOrderUseCase } from "./createOrderUseCase";
 
 class CreateOrderController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { customerId, totalprice, products } = request.body;
+    const { customerId, products, totalprice } = request.body;
+
     const createOrderUseCase = container.resolve(CreateOrderUseCase);
 
     const createOrder = await createOrderUseCase.execute({
       customerId,
-      totalprice,
       products,
+      totalprice,
     });
     return response.status(201).json(createOrder);
   }

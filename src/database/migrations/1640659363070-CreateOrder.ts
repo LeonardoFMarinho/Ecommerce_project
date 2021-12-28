@@ -24,11 +24,11 @@ export class CreateOrder1640659363070 implements MigrationInterface {
           },
           {
             name: "totalprice",
-            type: "varchar",
+            type: "int",
           },
           {
             name: "products",
-            type: "varchar",
+            type: "float",
           },
           //   {
           //     name: "quantity",

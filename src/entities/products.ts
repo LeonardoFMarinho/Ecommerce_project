@@ -1,11 +1,4 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  OneToOne,
-  PrimaryColumn,
-} from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 
 @Entity("products")
@@ -16,11 +9,11 @@ class Products {
   @Column()
   name: string;
 
-  @Column()
-  price: string;
+  @Column("int")
+  price: number;
 
-  @Column()
-  quantity: string;
+  @Column("int")
+  quantity: number;
 
   @CreateDateColumn()
   created_at: Date;
