@@ -1,5 +1,15 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Double,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryColumn,
+} from "typeorm";
 import { v4 as uuidv4 } from "uuid";
+
+import { Products } from "./products";
 
 @Entity("orders")
 class Order {
@@ -12,11 +22,10 @@ class Order {
   @Column("int")
   totalprice: number;
 
-  @Column()
-  products: number;
-
+  @OneToMany(type => Products, order => Order)
+  products: Products[];
   // @Column()
-  // quantity: string;
+  // quantity: number;
 
   @CreateDateColumn()
   created_at: Date;

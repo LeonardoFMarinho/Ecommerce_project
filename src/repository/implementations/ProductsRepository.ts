@@ -19,6 +19,10 @@ class ProductsRepository implements IProductsRepository {
     await this.repository.save(product);
     return product;
   }
+  async findById(productid: string): Promise<Products> {
+    const produc = await this.repository.findOne({ productid });
+    return produc;
+  }
   async findByName(name: string): Promise<Products> {
     const findbyname = await this.repository.findOne({ name });
     return findbyname;

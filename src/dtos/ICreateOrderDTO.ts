@@ -1,6 +1,9 @@
+import { Products } from "../entities/products";
+
 interface ICreateOrderDTO {
   customerId: string;
-  products: number;
+  products: Products[];
+  price: number;
   totalprice: number;
 }
 

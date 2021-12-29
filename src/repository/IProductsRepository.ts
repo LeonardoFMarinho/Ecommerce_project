@@ -3,7 +3,7 @@ import { Products } from "../entities/products";
 
 interface IProductsRepository {
   create(data: ICreateProductDTO): Promise<Products>;
-  //   findByPrice(price: number): Promise<Products>;
+  findById(productid: string): Promise<Products>;
   findByName(name: string): Promise<Products>;
   listProducts(): Promise<Products[]>;
 }

@@ -1,4 +1,4 @@
-import { getRepository, Repository } from "typeorm";
+import { getManager, getRepository, Repository } from "typeorm";
 
 import { ICreateOrderDTO } from "../../dtos/ICreateOrderDTO";
 import { Order } from "../../entities/orders";
@@ -6,6 +6,8 @@ import { IOrderRepository } from "../IOrderRepository";
 
 class OrderRepository implements IOrderRepository {
   private repository: Repository<Order>;
+  repositoryManager = getManager();
+
   constructor() {
     this.repository = getRepository(Order);
   }
@@ -13,9 +15,16 @@ class OrderRepository implements IOrderRepository {
   async create({
     products,
     customerId,
+    price,
     totalprice,
   }: ICreateOrderDTO): Promise<Order> {
-    const order = this.repository.create({ products, customerId, totalprice });
+    const order = this.repository.create({
+      products,
+      customerId,
+      price,
+      totalprice,
+    });
+    console.log(order);
     await this.repository.save(order);
     return order;
   }
@@ -25,11 +34,9 @@ class OrderRepository implements IOrderRepository {
   //   return allOrders;
   // }
   async listByOrderTotalPrice(): Promise<Order[]> {
-    const orderByTotalPrice = await this.repository.find({
-      order: {
-        totalprice: "DESC",
-      },
-    });
+    const orderByTotalPrice = await this.repositoryManager.query(
+      `SELECT * FROM orders ORDER BY totalprice `,
+    );
     return orderByTotalPrice;
   }
 }
