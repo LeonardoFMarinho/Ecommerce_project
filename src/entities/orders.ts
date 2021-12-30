@@ -22,7 +22,7 @@ class Order {
   @Column("int")
   totalprice: number;
 
-  @OneToMany(type => Products, order => Order)
+  @OneToMany(type => Products, order => Order, { cascade: true })
   products: Products[];
   // @Column()
   // quantity: number;

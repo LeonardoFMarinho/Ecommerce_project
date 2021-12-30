@@ -1,13 +1,12 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export default class RelationsProductAndOrder1640819719157
+export default class RelationsUpdated1640883592068
   implements MigrationInterface
 {
-  name = "RelationsProductAndOrder1640819719157";
+  name = "RelationsUpdated1640883592068";
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`ALTER TABLE "orders" DROP COLUMN "products"`);
-    await queryRunner.query(`ALTER TABLE "orders" DROP COLUMN "quantity"`);
     await queryRunner.query(
       `ALTER TABLE "products" ADD "orderId" character varying`,
     );
@@ -89,9 +88,6 @@ export default class RelationsProductAndOrder1640819719157
       `ALTER TABLE "customer" ADD CONSTRAINT "PK_a7a13f4cacb744524e44dfdad32" PRIMARY KEY ("id")`,
     );
     await queryRunner.query(`ALTER TABLE "products" DROP COLUMN "orderId"`);
-    await queryRunner.query(
-      `ALTER TABLE "orders" ADD "quantity" numeric NOT NULL`,
-    );
     await queryRunner.query(
       `ALTER TABLE "orders" ADD "products" numeric NOT NULL`,
     );

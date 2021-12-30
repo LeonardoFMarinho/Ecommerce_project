@@ -2,8 +2,12 @@ import { getManager, getRepository, Repository } from "typeorm";
 
 import { ICreateOrderDTO } from "../../dtos/ICreateOrderDTO";
 import { Order } from "../../entities/orders";
+import { Products } from "../../entities/products";
 import { IOrderRepository } from "../IOrderRepository";
 
+interface IRequest {
+  product: Products;
+}
 class OrderRepository implements IOrderRepository {
   private repository: Repository<Order>;
   repositoryManager = getManager();
@@ -24,7 +28,6 @@ class OrderRepository implements IOrderRepository {
       price,
       totalprice,
     });
-    console.log(order);
     await this.repository.save(order);
     return order;
   }
@@ -35,9 +38,25 @@ class OrderRepository implements IOrderRepository {
   // }
   async listByOrderTotalPrice(): Promise<Order[]> {
     const orderByTotalPrice = await this.repositoryManager.query(
-      `SELECT * FROM orders ORDER BY totalprice `,
+      `SELECT totalprice, * FROM orders ORDER BY totalprice `,
     );
     return orderByTotalPrice;
+  }
+  async listOrderByDate({ fromDay, toDay }): Promise<Order[]> {
+    console.log(fromDay);
+    console.log(toDay);
+    const listOrderByDate = await this.repositoryManager.query(
+      `SELECT created_at, * FROM orders WHERE created_at BETWEEN '${fromDay}%' AND '${toDay}%'`,
+    );
+    return listOrderByDate;
+  }
+  async listOrderByProduct({ product }: IRequest): Promise<Order[]> {
+    const idOfThisProduct = product.productid;
+    console.log(idOfThisProduct);
+    const listOrderProduct = await this.repositoryManager.query(
+      `SELECT id FROM orders WHERE productid = ${idOfThisProduct}`,
+    );
+    return listOrderProduct;
   }
 }
 
