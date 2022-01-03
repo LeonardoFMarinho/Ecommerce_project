@@ -1,18 +1,7 @@
-[]Criação de usuário 
+Inicialmente, baixar o  pacote de dependencias (yarn)
 
+Utilizar o comando (sudo docker-compose up) para subir os containers e estar com ambos containers funcionando. 
 
-[]Criação de produtos
+Utilziar os comandos ( typeORM migrations:run ) =>  (yarn typeorm migration:generate -- -n RelationsProductAndOrder) => (yarn typeORM migraitons:run)
 
-
-[]Criação de ordens
-
-
-[]Listagem de usuários
-
-[]Listagem de produtos
-
-[]Listagem de ordens
-
-
-
-[]
+Utilizar a ferramente cliente de API rest ( utilizado o insomnia durante o desenvolvimento) para testar funcionalidades.
